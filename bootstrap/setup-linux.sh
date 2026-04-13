@@ -1,16 +1,39 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-REPO="$HOME/DOTFILES"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-mkdir -p ~/.config/powershell
-mkdir -p ~/.config
+echo "Dotfiles repo: $REPO"
 
-ln -sf "$REPO/linux/powershell/Microsoft.PowerShell_profile.ps1" ~/.config/powershell/Microsoft.PowerShell_profile.ps1
-ln -sf "$REPO/shared/starship.toml" ~/.config/starship.toml
+mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.config/powershell"
 
-# Choose one:
-ln -sf "$REPO/linux/bash/.bashrc" ~/.bashrc
-# ln -sf "$REPO/linux/zsh/.zshrc" ~/.zshrc
+link_file() {
+  local source="$1"
+  local target="$2"
 
-echo "Linux dotfiles linked."
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    echo "Removing existing path: $target"
+    rm -rf "$target"
+  fi
+
+  ln -s "$source" "$target"
+  echo "Linked $target -> $source"
+}
+
+# Shared
+link_file "$REPO/shared/starship.toml" "$HOME/.config/starship.toml"
+link_file "$REPO/nvim" "$HOME/.config/nvim"
+
+# Shells
+link_file "$REPO/linux/bash/.bashrc" "$HOME/.bashrc"
+# link_file "$REPO/linux/zsh/.zshrc" "$HOME/.zshrc"
+
+# PowerShell profile on Linux (optional, only useful if pwsh is installed)
+link_file "$REPO/linux/powershell/Microsoft.PowerShell_profile.ps1" \
+  "$HOME/.config/powershell/Microsoft.PowerShell_profile.ps1"
+
+echo
+echo "Bootstrap completed."
+echo "Make sure these are installed: git, nvim, starship, rustup."
+echo "Then open Neovim and run: :Pckr sync"
