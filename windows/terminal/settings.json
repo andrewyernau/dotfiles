@@ -1,0 +1,17 @@
+{
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "defaultProfile": "{YOUR-POWERSHELL-PROFILE-GUID}",
+  "copyOnSelect": false,
+  "copyFormatting": "none",
+  "useAcrylicInTabRow": true,
+  "showTerminalTitleInTitlebar": true,
+  "profiles": {
+    "defaults": {
+      "font": {
+        "face": "CaskaydiaCove Nerd Font"
+      },
+      "opacity": 92,
+      "useAcrylic": true
+    }
+  }
+}
