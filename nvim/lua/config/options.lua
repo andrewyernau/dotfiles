@@ -6,3 +6,5 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
+vim.opt.updatetime = 250
+vim.opt.signcolumn = "yes"
