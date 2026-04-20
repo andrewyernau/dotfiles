@@ -12,6 +12,39 @@ Write-Host "Dotfiles repo: $repo"
 New-Item -ItemType Directory -Force -Path $userConfig | Out-Null
 New-Item -ItemType Directory -Force -Path $psProfileDir | Out-Null
 
+function Test-CommandAvailable {
+    param([string]$Name)
+
+    return $null -ne (Get-Command $Name -ErrorAction SilentlyContinue)
+}
+
+function Install-WithWinget {
+    param(
+        [string]$CommandName,
+        [string]$PackageId,
+        [string]$Label
+    )
+
+    if (Test-CommandAvailable -Name $CommandName) {
+        Write-Host "$Label is already installed."
+        return
+    }
+
+    if (Test-CommandAvailable -Name "winget") {
+        Write-Host "Installing $Label with winget..."
+        & winget install --id $PackageId -e --accept-package-agreements --accept-source-agreements
+
+        if ($LASTEXITCODE -eq 0) {
+            return
+        }
+
+        Write-Warning "winget could not install $Label automatically. Install it manually and rerun the bootstrap if needed."
+        return
+    }
+
+    Write-Warning "winget is not available. Install $Label manually."
+}
+
 function Remove-PathIfExists {
     param([string]$Path)
 
@@ -30,6 +63,10 @@ function New-Symlink {
     Remove-PathIfExists -Path $LinkPath
     New-Item -ItemType SymbolicLink -Path $LinkPath -Target $TargetPath | Out-Null
 }
+
+Install-WithWinget -CommandName "fzf" -PackageId "junegunn.fzf" -Label "fzf"
+Install-WithWinget -CommandName "rg" -PackageId "BurntSushi.ripgrep.MSVC" -Label "ripgrep"
+Install-WithWinget -CommandName "bat" -PackageId "sharkdp.bat" -Label "bat"
 
 Write-Host "Linking PowerShell profile..."
 New-Symlink `

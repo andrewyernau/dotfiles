@@ -37,6 +37,7 @@ chmod +x ./bootstrap/setup-linux.sh
 ## What the bootstrap scripts do
 The bootstrap scripts:
 
+- install `fzf`, `ripgrep`, and `bat` automatically when a supported package manager is available
 - link the Neovim configuration into the correct path
 - link the shared Starship prompt configuration
 - link shell-specific configuration files
@@ -52,6 +53,9 @@ Some external dependencies must already be installed:
 - Starship
 - Rust toolchain (rustup)
 - Rust components: rust-analyzer, rustfmt, clippy
+
+`fzf`, `ripgrep`, and `bat` are installed by the bootstrap scripts when `winget` is available on Windows or a supported package manager is available on Linux.
+On some Debian/Ubuntu-based systems, `bat` is exposed as `batcat`.
 
 Optional:
 
