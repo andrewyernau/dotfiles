@@ -3,7 +3,6 @@ $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $userConfig = Join-Path $HOME ".config"
 $nvimConfig = Join-Path $env:LOCALAPPDATA "nvim"
-$starshipConfig = Join-Path $userConfig "starship.toml"
 $psProfilePath = $PROFILE.CurrentUserCurrentHost
 $psProfileDir = Split-Path -Parent $psProfilePath
 
@@ -73,11 +72,6 @@ New-Symlink `
     -LinkPath $psProfilePath `
     -TargetPath (Join-Path $repo "windows\powershell\Microsoft.PowerShell_profile.ps1")
 
-Write-Host "Linking Starship config..."
-New-Symlink `
-    -LinkPath $starshipConfig `
-    -TargetPath (Join-Path $repo "shared\starship.toml")
-
 Write-Host "Linking Neovim config..."
 if (Test-Path $nvimConfig) {
     Write-Host "Removing existing Neovim config: $nvimConfig"
@@ -87,5 +81,5 @@ cmd /c "mklink /J `"$nvimConfig`" `"$repo\nvim`"" | Out-Host
 
 Write-Host ""
 Write-Host "Bootstrap completed."
-Write-Host "Make sure these are installed: git, nvim, starship, rustup."
+Write-Host "Make sure these are installed: git, nvim, rustup."
 Write-Host "Then open Neovim and run: :Pckr sync"

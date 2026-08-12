@@ -1,0 +1,83 @@
+# Pure-inspired Powerlevel10k prompt. ASCII only: no icons, emoji or patched
+# fonts are required.
+typeset -g POWERLEVEL9K_MODE=ascii
+typeset -g POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+# Keep information above the command line, like Pure:
+#
+#   andrew@server ~/code/project main *                 took 8s
+#   >
+typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  context
+  dir
+  vcs
+  newline
+  prompt_char
+)
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time)
+
+typeset -g POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+typeset -g POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
+typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# No boxes or separators: each segment is plain text separated by one space.
+typeset -g POWERLEVEL9K_BACKGROUND=
+typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=
+typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
+typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=' '
+typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
+typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
+typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=''
+
+# Pure only shows user@host where that context matters. For these dotfiles the
+# useful case is an SSH connection; root remains visible everywhere.
+typeset -g POWERLEVEL9K_CONTEXT_DEFAULT_CONTENT_EXPANSION=
+typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_CONTENT_EXPANSION='%n@%m'
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_CONTENT_EXPANSION='%n@%m'
+typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=242
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=196
+
+# The path is the visual anchor. Keep it readable without filling the terminal.
+typeset -g POWERLEVEL9K_DIR_FOREGROUND=39
+typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=45
+typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=60
+typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
+
+# Git stays intentionally quiet: branch in grey, warm status marks, cyan sync
+# indicators. Powerlevel10k calculates this asynchronously.
+typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=''
+typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=242
+typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=242
+typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=242
+typeset -g POWERLEVEL9K_VCS_CONFLICTED_FOREGROUND=196
+typeset -g POWERLEVEL9K_VCS_LOADING_TEXT='git...'
+typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON=' ?'
+typeset -g POWERLEVEL9K_VCS_UNSTAGED_ICON=' *'
+typeset -g POWERLEVEL9K_VCS_STAGED_ICON=' +'
+typeset -g POWERLEVEL9K_VCS_CONFLICTED_ICON=' x'
+typeset -g POWERLEVEL9K_VCS_STASH_ICON=' s'
+typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=' <'
+typeset -g POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=' >'
+typeset -g POWERLEVEL9K_VCS_ACTIONFORMAT_FOREGROUND=178
+
+# A single prompt character carries the exit status, as in Pure.
+typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION='>'
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION='>'
+typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_FOREGROUND=magenta
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_FOREGROUND=red
+typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_VISUAL_IDENTIFIER_EXPANSION=
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_VISUAL_IDENTIFIER_EXPANSION=
+
+# Only mention commands that took long enough to be noteworthy.
+typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
+typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=1
+typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=178
+typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='took '

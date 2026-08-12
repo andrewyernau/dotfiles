@@ -35,7 +35,4 @@ function gs { git status }
 function ga { git add . }
 function gc { param([string]$m) git commit -m $m }
 function gp { git push }
-function gd { git diff } 
-
-# Prompt
-Invoke-Expression (&starship init powershell)
+function gd { git diff }

@@ -1,0 +1,11 @@
+[DEFAULT]
+# A fifth failure inside one minute permanently bans the source address.
+findtime = 60s
+maxretry = 5
+bantime = -1
+
+[sshd]
+enabled = true
+mode = aggressive
+port = ssh
+backend = auto
