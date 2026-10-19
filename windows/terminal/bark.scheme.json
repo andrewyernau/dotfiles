@@ -1,0 +1,23 @@
+{
+  "name": "Bark",
+  "background": "#101010",
+  "foreground": "#D0D0D0",
+  "cursorColor": "#D0D0D0",
+  "selectionBackground": "#2B2B2B",
+  "black": "#101010",
+  "red": "#AB4642",
+  "green": "#A1B56C",
+  "yellow": "#F7CA88",
+  "blue": "#7CAFC2",
+  "purple": "#BA8BAF",
+  "cyan": "#86C1B9",
+  "white": "#D0D0D0",
+  "brightBlack": "#505050",
+  "brightRed": "#AB4642",
+  "brightGreen": "#A1B56C",
+  "brightYellow": "#F7CA88",
+  "brightBlue": "#7CAFC2",
+  "brightPurple": "#BA8BAF",
+  "brightCyan": "#86C1B9",
+  "brightWhite": "#E0E0E0"
+}

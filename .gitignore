@@ -4,3 +4,8 @@ Thumbs.db
 .env
 *.secret
 *.zip
+
+# Per-machine shell overrides and shell state
+.zshrc.local
+.zsh_history
+.zcompdump*

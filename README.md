@@ -14,6 +14,14 @@ The Neovim configuration is shared across both platforms, while OS-specific sett
 └── windows/
 ```
 
+## Ubuntu / WSL: Zsh
+
+For a shell-only WSL migration with backups, autosuggestions, syntax highlighting,
+fzf history search, preserved development tools, and a Bark-inspired prompt,
+see [WSL.md](WSL.md). Run `bash bootstrap/setup-wsl.sh --dry-run` to inspect it.
+On WSL, `setup-linux.sh` delegates to this installer. The service and network
+setup described below applies to the general Linux installer outside WSL.
+
 ## Installation
 
 Clone the repository and run the bootstrap script for your platform.

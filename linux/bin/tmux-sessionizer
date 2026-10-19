@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Optional arguments override the project roots, e.g. tmux-sessionizer ~/work.
+roots=("$@")
+if ((${#roots[@]} == 0)); then roots=("$HOME/code" "$HOME/setenova"); fi
+choice=$(
+  {
+    tmux list-sessions -F '[SESSION: #{session_name}]' 2>/dev/null || true
+    for base in "${roots[@]}"; do
+      [[ -d "$base" ]] || continue
+      find -L "$base" -mindepth 1 -maxdepth 1 -type d 2>/dev/null || true
+    done
+  } | fzf --prompt='Sesión o proyecto > ' --height=40% --reverse
+) || exit 0
+[[ -n "$choice" ]] || exit 0
+if [[ "$choice" == '[SESSION: '*']' ]]; then
+  session="${choice#\[SESSION: }"; session="${session%\]}"
+else
+  [[ -d "$choice" ]] || exit 0
+  # A short path hash distinguishes projects with identical directory names.
+  digest=$(printf '%s' "$choice" | sha256sum); digest=${digest:0:6}
+  session="$(basename "$choice" | tr '.: ' '___')-$digest"
+  if ! tmux has-session -t "=$session" 2>/dev/null; then
+    tmux new-session -d -s "$session" -c "$choice"
+  fi
+fi
+if [[ -n "${TMUX:-}" ]]; then
+  tmux switch-client -t "=$session"
+else
+  tmux attach-session -t "=$session"
+fi

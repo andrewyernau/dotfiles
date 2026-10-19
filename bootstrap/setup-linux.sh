@@ -3,6 +3,11 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# WSL uses the shell-only installer; keep its network and services managed by WSL.
+if [[ -n "${WSL_DISTRO_NAME:-}" ]] || grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null; then
+  exec bash "$REPO/bootstrap/setup-wsl.sh" "$@"
+fi
+
 STATIC_IP_CIDR="${STATIC_IP_CIDR:-}"
 STATIC_INTERFACE="${STATIC_INTERFACE:-}"
 STATIC_GATEWAY="${STATIC_GATEWAY:-}"
