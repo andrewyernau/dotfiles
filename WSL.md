@@ -45,6 +45,8 @@ Neovim se mantienen fuera de este instalador.
 | Ctrl+T | Elegir una sesión tmux o un proyecto |
 | Ctrl+F | Abrir tmuxxer, si está instalado |
 | Flechas arriba/abajo | Buscar en el historial por el prefijo escrito |
+| Ctrl+izquierda/derecha | Mover el cursor entre palabras |
+| Ctrl+arriba/abajo | Buscar en el historial por el prefijo escrito |
 
 Ctrl+T busca proyectos bajo `~/code` y `~/setenova` si existen. Puedes cambiar
 esas rutas en `~/.zshrc.local`; hay un ejemplo en `linux/zsh/local.example.zsh`.

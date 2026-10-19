@@ -27,6 +27,16 @@ bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 bindkey '^[[Z' reverse-menu-complete
 
+# Windows Terminal/xterm send CSI 1;5 + direction for Ctrl+arrow keys.
+# Bind the complete sequences so their suffixes are not inserted as text.
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5A' up-line-or-search
+bindkey '^[[1;5B' down-line-or-search
+# Older terminals may omit the initial 1; modifier encoding.
+bindkey '^[[5D' backward-word
+bindkey '^[[5C' forward-word
+
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
